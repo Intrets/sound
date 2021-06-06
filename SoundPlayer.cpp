@@ -43,10 +43,15 @@ namespace sound
 		auto res = std::make_unique<SoundPlayer>();
 
 		if (Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+			SDL_Quit();
 			return std::nullopt;
 		}
 
-		Mix_Init(MIX_INIT_OGG);
+		if (Mix_Init(MIX_INIT_OGG) == 0) {
+			Mix_Quit();
+			SDL_Quit();
+			return std::nullopt;
+		}
 
 		res->valid = true;
 		res->channels = Mix_AllocateChannels(channels);
