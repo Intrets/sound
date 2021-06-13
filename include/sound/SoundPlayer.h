@@ -50,6 +50,6 @@ namespace sound
 		SoundPlayer() = default;
 		~SoundPlayer();
 
-		NOCOPYMOVE(SoundPlayer);
+		NO_COPY_MOVE(SoundPlayer);
 	};
 }
