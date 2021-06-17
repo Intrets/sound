@@ -7,7 +7,7 @@
 #include <SDL_mixer.h>
 #include <SDL.h>
 
-#include <mem/Locator.h>
+#include <mem/Global.h>
 
 #include <misc/PathManager.h>
 
@@ -57,7 +57,7 @@ namespace sound
 		res->channels = Mix_AllocateChannels(channels);
 		res->frequency = frequency;
 
-		auto soundsPath = Locator<misc::PathManager>::ref().getSoundsPath();
+		auto soundsPath = Global<misc::PathManager>::ref().getSoundsPath();
 
 		res->loadSound(Sample::BUTTON_CLICK, soundsPath / "button.oga");
 		res->loadSound(Sample::BUTTON_HOVER, soundsPath / "hover.oga");
