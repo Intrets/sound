@@ -57,7 +57,7 @@ namespace sound
 		res->channels = Mix_AllocateChannels(channels);
 		res->frequency = frequency;
 
-		auto soundsPath = Global<misc::PathManager>::ref().getSoundsPath();
+		auto soundsPath = Global<misc::PathManager>()->getSoundsPath();
 
 		res->loadSound(Sample::BUTTON_CLICK, soundsPath / "button.oga");
 		res->loadSound(Sample::BUTTON_HOVER, soundsPath / "hover.oga");
