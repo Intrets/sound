@@ -16,6 +16,5 @@ make_module(
 		SDL_Mixer
 		misc
 		mem
-		GLFW3
 )
 

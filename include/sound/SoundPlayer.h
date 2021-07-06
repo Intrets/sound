@@ -13,6 +13,9 @@ struct Mix_Chunk;
 
 namespace sound
 {
+	using Duration = std::chrono::system_clock::duration;
+	using TimePoint = std::chrono::system_clock::time_point;
+
 	enum class Sample
 	{
 		BUTTON_CLICK,
@@ -25,9 +28,9 @@ namespace sound
 	struct SoundStore
 	{
 		Mix_Chunk* data;
-		float duration;
+		Duration duration;
 
-		std::vector<double> plays;
+		std::vector<TimePoint> plays;
 
 		std::optional<int> playChannel(int channel, int volume, int max, int loops);
 	};

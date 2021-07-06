@@ -1,8 +1,7 @@
 #include "SoundPlayer.h"
 
 #include <iostream>
-
-#include <GLFW/glfw3.h>
+#include <chrono>
 
 #include <SDL_mixer.h>
 #include <SDL.h>
@@ -14,8 +13,8 @@
 namespace sound
 {
 	std::optional<int> SoundStore::playChannel(int channel, int volume, int max, int loops) {
-		const auto current = glfwGetTime();
-		const auto newEnd = current + this->duration * (loops + 1.0);
+		const TimePoint current = std::chrono::system_clock::now();
+		const TimePoint newEnd = current + (this->duration * (loops + 1));
 
 		std::erase_if(this->plays, [=](auto e) {return current > e; });
 		if (max > 0 && this->plays.size() >= max) {
@@ -79,7 +78,8 @@ namespace sound
 		}
 		else {
 			this->sounds[static_cast<size_t>(sample)].data = chunk;
-			this->sounds[static_cast<size_t>(sample)].duration = static_cast<float>(chunk->alen) / static_cast<float>(this->frequency) / static_cast<float>(this->bytesPerSample);
+			auto duration = static_cast<float>(chunk->alen) / static_cast<float>(this->frequency) / static_cast<float>(this->bytesPerSample);
+			this->sounds[static_cast<size_t>(sample)].duration = std::chrono::milliseconds(static_cast<int>(duration * 1000.0f));
 			return true;
 		}
 	}
