@@ -1,17 +1,21 @@
-include("${PROJECT_SOURCE_DIR}/cmake/MakeModule.cmake")
+cmake_minimum_required(VERSION 3.20)
+
+include("./cmake/MakeModule.cmake")
 
 set(MODULE_NAME sound)
 
-set(MODULE_FILES
-	SoundPlayer
+project(${MODULE_NAME})
+
+make_module(
+  MODULE_NAME ${MODULE_NAME}
+  MODULE_FILES
+    SoundPlayer
+  CXX_STANDARD 20
+  REQUIRED_LIBS
+    SDL2::SDL2-static
+    SDL_Mixer
+    misc
+    mem
+    GLFW3
 )
 
-make_module(${MODULE_NAME} "${MODULE_FILES}")
-
-target_link_libraries(${MODULE_NAME} PRIVATE
-	SDL2::SDL2-static
-	SDL_Mixer
-	misc
-	mem
-	GLFW3
-)
