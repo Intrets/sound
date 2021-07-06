@@ -1,5 +1,6 @@
 #include "SoundPlayer.h"
 
+#include <cassert>
 #include <iostream>
 #include <chrono>
 
